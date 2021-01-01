@@ -1,3 +1,3 @@
 print("hello")
 print('hi')
-print('3')
+print('6')

@@ -3,7 +3,7 @@ import yaml
 
 from Calculator.Calculator import Calculator
 
-with open("./datas.yaml") as f:
+with open("datas.yaml") as f:
     datas = yaml.safe_load(f)
     print(datas)
     calc_add_datas = datas["add"]

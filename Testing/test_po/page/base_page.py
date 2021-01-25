@@ -5,21 +5,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-class Testweixin:
+class BasePage:
 
-    def setup(self):
-        chrome_args = webdriver.ChromeOptions()
-        chrome_args.debugger_addressm = "127.0.0.1:9222"
+    def __init__(self):
         self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
+        self.driver.add_cookie()
         self.driver.implicitly_wait(5)
 
-
-    def teardown(self):
-        self.driver.quit()
-
-    def test_cookie(self):
-            # 获取cookie 并储存
+    def cookie(self):
+        # 获取cookie 并储存
         # self.driver.get("https://work.weixin.qq.com/")
         # self.driver.find_element(By.XPATH, "//*[@id='indexTop']/div[2]/aside/a[1]").click()
         # sleep(15)
@@ -28,15 +22,12 @@ class Testweixin:
         #     json.dump(cookies,f)
 
         self.driver.get("https://work.weixin.qq.com/")
-            # 读取cookie
-        with open("cookie.json","r") as f:
+        # 读取cookie
+        with open("cookie.json", "r") as f:
             cookies = json.load(f)
             for cookie in cookies:
                 self.driver.add_cookie(cookie)
         self.driver.get("https://work.weixin.qq.com/wework_admin/frame")
-        self.driver.find_element(By.XPATH,"//*[@id='menu_customer']/span").click()
+        self.driver.find_element(By.XPATH, "//*[@id='menu_customer']/span").click()
         sleep(5)
-
-
-
 
